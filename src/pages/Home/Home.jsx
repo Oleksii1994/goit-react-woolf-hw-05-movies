@@ -1,6 +1,8 @@
 // import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
+import { TrendingItem, TrendingGallery, TitleMovieThumb } from './Home.styled';
 // const key = '298a5b49d75fb843dc4c4c38d9d64139';
 
 const fetchData = async () => {
@@ -59,30 +61,30 @@ const Home = () => {
   console.log(popularMovies);
 
   return (
-    <div>
-      <ul>
-        {popularMovies.map(
-          ({
-            poster_path,
-            overview,
-            popularity,
-            genre_ids,
-            original_title,
-          }) => {
-            return (
-              <li key={poster_path}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                  alt={original_title}
-                  width="400"
-                />
+    <TrendingGallery>
+      {popularMovies.map(
+        ({
+          poster_path,
+          // overview,
+          // popularity,
+          // genre_ids,
+          original_title,
+        }) => {
+          return (
+            <TrendingItem key={poster_path}>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                alt={original_title}
+                width="352"
+              />
+              <TitleMovieThumb>
                 <h2>{original_title}</h2>
-              </li>
-            );
-          }
-        )}
-      </ul>
-    </div>
+              </TitleMovieThumb>
+            </TrendingItem>
+          );
+        }
+      )}
+    </TrendingGallery>
   );
 };
 
