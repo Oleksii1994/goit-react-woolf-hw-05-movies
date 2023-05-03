@@ -22,6 +22,12 @@ a {
   text-decoration: none;
 }
 
+img {
+  display: block;
+
+  object-fit: contain;
+}
+
 ul,
 li,
 h2,

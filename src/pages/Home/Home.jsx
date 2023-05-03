@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { TrendingItem, TrendingGallery, TitleMovieThumb } from './Home.styled';
+import {
+  TrendingItem,
+  TrendingGallery,
+  ImgThumb,
+  TitleMovieThumb,
+} from './Home.styled';
 //
 
 const fetchData = async () => {
@@ -30,26 +35,19 @@ const Home = () => {
           data: { results },
         } = await fetchData();
 
-        console.log(results);
+        // console.log(results);
 
         const filteredData = results.map(
-          ({
+          ({ id, poster_path, overview, popularity, genre_ids, title }) => ({
             id,
             poster_path,
             overview,
             popularity,
             genre_ids,
-            original_title,
-          }) => ({
-            id,
-            poster_path,
-            overview,
-            popularity,
-            genre_ids,
-            original_title,
+            title,
           })
         );
-        console.log(filteredData);
+
         setPopularMovies(filteredData);
       };
       getTrendingMovies();
@@ -66,21 +64,21 @@ const Home = () => {
         ({
           id,
           poster_path,
-          // overview,
-          // popularity,
-          // genre_ids,
-          original_title,
+
+          title,
         }) => {
           return (
             <Link to={`/movies/${id}`} key={id}>
               <TrendingItem>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                  alt={original_title}
-                  width="352"
-                />
+                <ImgThumb>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                    alt={title}
+                    width="352"
+                  />
+                </ImgThumb>
                 <TitleMovieThumb>
-                  <h2>{original_title}</h2>
+                  <h2>{title}</h2>
                 </TitleMovieThumb>
               </TrendingItem>
             </Link>

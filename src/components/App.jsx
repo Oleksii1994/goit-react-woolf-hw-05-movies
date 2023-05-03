@@ -10,26 +10,26 @@ import { Layout } from './Layout/Layout';
 // import { Reviews } from './Reviews/Reviews';
 
 export const App = () => {
-  const [searchQuerry, setSearchQuerry] = useState('');
+  // const [searchQuerry, setSearchQuerry] = useState('');
 
-  const handleSubmit = searchWord => {
-    console.log('submit form');
-    if (searchWord === searchQuerry) {
-      return Notiflix.Notify.warning('Try another word to find');
-    }
+  // const handleSubmit = searchWord => {
+  //   console.log('submit form');
+  //   if (searchWord === searchQuerry) {
+  //     return Notiflix.Notify.warning('Try another word to find');
+  //   }
     // setSearchQuerry(searchWord.toLowerCase().trim());
     // setPage(1);
     // setImages([]);
     // setShowButton(false);
     // setIsLoading(true);
-  };
+  // };
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
           path="movies"
-          element={<SearchMovies handlerSubmit={handleSubmit} />}
+          element={<SearchMovies  />}
         />
         <Route path="movies/:movieId" element={<MovieInfo />}>
           {/* <Route path="cast" element={<Cast />} />

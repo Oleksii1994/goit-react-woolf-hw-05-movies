@@ -20,6 +20,11 @@ export const TrendingItem = styled.li`
   }
 `;
 
+export const ImgThumb = styled.div`
+  width: 352px;
+  height: 528px;
+`;
+
 export const TrendingGallery = styled.ul`
   padding: 32px 0;
   list-style: none;
