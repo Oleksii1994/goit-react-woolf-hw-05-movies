@@ -18,6 +18,10 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
 ul,
 li,
 h2,
@@ -26,8 +30,5 @@ h1,
 h3 {
   margin: 0;
   padding: 0;
-}
-
-a {
-  color: #161516;
+  color: azure;
 }

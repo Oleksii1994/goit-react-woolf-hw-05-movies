@@ -1,23 +1,24 @@
 // import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { TrendingItem, TrendingGallery, TitleMovieThumb } from './Home.styled';
-// const key = '298a5b49d75fb843dc4c4c38d9d64139';
+//
 
 const fetchData = async () => {
   try {
-    return await axios(
-      'https://api.themoviedb.org/3/trending/movie/week?api_key=298a5b49d75fb843dc4c4c38d9d64139'
+    const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
+
+    return await axios.get(
+      `https://api.themoviedb.org/3/trending/movie/week?api_key=${KEY}`
     );
-    // const trendingMovies = response.data.results;
+    // const trendingMovies = res.data.results;
     // console.log(trendingMovies);
-    // return trendingMovies;
   } catch (e) {
     console.log(e);
   }
 };
-// fetch();
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -33,12 +34,14 @@ const Home = () => {
 
         const filteredData = results.map(
           ({
+            id,
             poster_path,
             overview,
             popularity,
             genre_ids,
             original_title,
           }) => ({
+            id,
             poster_path,
             overview,
             popularity,
@@ -54,16 +57,14 @@ const Home = () => {
       console.log(e);
     }
 
-    // console.log(popularMovies);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(popularMovies);
 
   return (
     <TrendingGallery>
       {popularMovies.map(
         ({
+          id,
           poster_path,
           // overview,
           // popularity,
@@ -71,16 +72,18 @@ const Home = () => {
           original_title,
         }) => {
           return (
-            <TrendingItem key={poster_path}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                alt={original_title}
-                width="352"
-              />
-              <TitleMovieThumb>
-                <h2>{original_title}</h2>
-              </TitleMovieThumb>
-            </TrendingItem>
+            <Link to={`/movies/${id}`} key={id}>
+              <TrendingItem>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                  alt={original_title}
+                  width="352"
+                />
+                <TitleMovieThumb>
+                  <h2>{original_title}</h2>
+                </TitleMovieThumb>
+              </TrendingItem>
+            </Link>
           );
         }
       )}

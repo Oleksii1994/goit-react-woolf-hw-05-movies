@@ -1,7 +1,7 @@
 // import { NavLink } from 'react-router-dom';
 
-const Movies = () => {
+const SearchMovies = () => {
   return <div>Movies</div>;
 };
 
-export default Movies;
+export default SearchMovies;
