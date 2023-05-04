@@ -1,28 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-// import Notiflix from 'notiflix';
+import { lazy } from 'react';
 
-// import { useState } from 'react';
-import Home from 'pages/Home/Home';
-import MovieInfo from 'pages/MovieInfo/MovieInfo';
-import Movies from 'pages/Movies/Movies';
-import { Layout } from './Layout/Layout';
-import { Cast } from './Cast/Cast';
-import { Reviews } from './Reviews/Reviews';
+const Home = lazy(() => import('../pages/Home/Home'));
+const Movies = lazy(() => import('../pages/Movies/Movies'));
+const MovieInfo = lazy(() => import('../pages/MovieInfo/MovieInfo'));
+const Layout = lazy(() => import('./Layout/Layout'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
-  // const [searchQuerry, setSearchQuerry] = useState('');
-
-  // const handleSubmit = searchWord => {
-  //   console.log('submit form');
-  //   if (searchWord === searchQuerry) {
-  //     return Notiflix.Notify.warning('Try another word to find');
-  //   }
-  // setSearchQuerry(searchWord.toLowerCase().trim());
-  // setPage(1);
-  // setImages([]);
-  // setShowButton(false);
-  // setIsLoading(true);
-  // };
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

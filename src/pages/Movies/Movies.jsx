@@ -1,8 +1,8 @@
 // import { NavLink } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import { useEffect, useState } from 'react';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useEffect, useState, Suspense } from 'react';
+import { Link, useSearchParams, useLocation, Outlet } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import axios from 'axios';
 import { FaSistrix } from 'react-icons/fa';
@@ -12,6 +12,7 @@ import {
   SearchInput,
   SearchFormBtn,
   SearchFormBtnLabel,
+  PosterImg,
 } from './Movies.styled';
 import {
   TrendingItem,
@@ -68,6 +69,7 @@ const Movies = () => {
             popularity,
             genre_ids,
             original_title,
+            PosterImg,
           }) => ({
             id,
             poster_path,
@@ -105,54 +107,6 @@ const Movies = () => {
       return;
     }
 
-    // if (!searchQuerry) {
-    //   return;
-    // }
-    // try {
-    //   // const { value } = event.target.lastChild;
-    //   // setSearchQuerry(value.toLowerCase().trim());
-    //   const getFilteredMovies = async () => {
-    //     const {
-    //       data: { results },
-    //     } = await fetchMovie(searchQuerry);
-    //     // console.log(results);
-
-    //     if (!results.length) {
-    //       Notiflix.Notify.warning(
-    //         'Oops there are no movies by this search, try another title'
-    //       );
-    //     }
-    //     const filteredData = results.map(
-    //       ({
-    //         id,
-    //         poster_path,
-    //         overview,
-    //         popularity,
-    //         genre_ids,
-    //         original_title,
-    //       }) => ({
-    //         id,
-    //         poster_path,
-    //         overview,
-    //         popularity,
-    //         genre_ids,
-    //         original_title,
-    //       })
-    //     );
-    //     // console.log(filteredData);
-    //     setFilteredMovies(filteredData);
-    //     // console.log(filteredMovies);
-    //   };
-
-    //   getFilteredMovies();
-    // } catch (e) {
-    //   console.log(e.message);
-    // }
-    // setPage(1);
-    // setImages([]);
-    // setShowButton(false);
-    // setIsLoading(true);
-    // };
     setSearchQuerry('');
   };
 
@@ -178,6 +132,7 @@ const Movies = () => {
           />
         </SearchForm>
       </SearchBarHeader>
+
       {filteredMovies && (
         <TrendingGallery>
           {filteredMovies.map(
@@ -191,14 +146,15 @@ const Movies = () => {
                 <Link to={`/movies/${id}`} state={{ from: location }} key={id}>
                   <TrendingItem>
                     <ImgThumb>
-                      <img
+                      <PosterImg
                         src={
                           poster_path
                             ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                            : `https://media.timeout.com/images/105807139/1372/772/image.jpg`
+                            : `https://media.istockphoto.com/id/147273331/uk/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%B8%D0%BD%D1%94-%D0%B2%D1%96%D0%B4%D1%80%D0%BE-%D0%BF%D0%BE%D0%BF%D0%BA%D0%BE%D1%80%D0%BD%D1%83.jpg?s=2048x2048&w=is&k=20&c=EVEpgBCnZmkrieihX5eDgsssBgcGyU71woNkj5N4FiM=`
                         }
                         alt={original_title}
                         width="352"
+                        height="528"
                       />
                     </ImgThumb>
                     <TitleMovieThumb>
@@ -214,9 +170,5 @@ const Movies = () => {
     </div>
   );
 };
-
-// SearchMovies.propTypes = {
-//   handlerSubmit: PropTypes.func.isRequired,
-// };
 
 export default Movies;

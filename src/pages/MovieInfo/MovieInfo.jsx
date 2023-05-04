@@ -1,5 +1,18 @@
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { useEffect, useState, useRef, Suspense } from 'react';
+
+import { FaChevronLeft } from 'react-icons/fa';
+import {
+  MovieDetailsThumb,
+  BackLink,
+  MovieInfoCard,
+  TextContentBox,
+  OverviewBox,
+  GenresBox,
+  AdditionalInfoBox,
+  AdditionalInfoList,
+  AdditionalItemLink,
+} from './MovieInfo.styled';
 
 import axios from 'axios';
 const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
@@ -27,44 +40,57 @@ const MovieInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log(movieDetails.genres);
-
   return (
-    <div>
-      {/* <>{MovieId}</> */}
-      <Link to={pathToBack.current}>Back</Link>
+    <MovieDetailsThumb>
+      <BackLink to={pathToBack.current}>
+        <FaChevronLeft />
+        Back
+      </BackLink>
       {Boolean(Object.keys(movieDetails).length) && (
-        <>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
-            alt={movieDetails.title}
-            width="352"
-          />
-          <h1>{movieDetails.title}</h1>
-          <p>Average score: {movieDetails.vote_average}</p>
-          <h2>Overview</h2>
-          <p>{movieDetails.overview}</p>
-          <h3>Genres</h3>
-          {movieDetails.genres.map(({ name }) => name).join(', ')}
-          <div>
-            Additional Information
-            <ul>
-              <li>
-                <Link to="cast">Cast</Link>
-              </li>
+        <div>
+          <MovieInfoCard>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                alt={movieDetails.title}
+                width="352"
+              />
+            </div>
+            <TextContentBox>
+              <h1>{movieDetails.title}</h1>
+              <p>Average score: {movieDetails.vote_average}</p>
+              <OverviewBox>
+                <h2>Overview</h2>
+                <p>{movieDetails.overview}</p>
+              </OverviewBox>
+              <GenresBox>
+                <h3>Genres</h3>
+                {movieDetails.genres.map(({ name }) => name).join(', ')}
+              </GenresBox>
+              <AdditionalInfoBox>
+                <h3>Additional Information</h3>
+                <AdditionalInfoList>
+                  <li>
+                    <AdditionalItemLink to="cast">Cast</AdditionalItemLink>
+                  </li>
 
-              <li>
-                <Link to="reviews">Reviews</Link>
-              </li>
-            </ul>
-          </div>
+                  <li>
+                    <AdditionalItemLink to="reviews">
+                      Reviews
+                    </AdditionalItemLink>
+                  </li>
+                </AdditionalInfoList>
+              </AdditionalInfoBox>
+            </TextContentBox>
+          </MovieInfoCard>
+
           <Suspense fallback="Loading...">
             <Outlet />
           </Suspense>
-        </>
+        </div>
       )}
       {!Object.keys(movieDetails).length && <p>Sorry, not found</p>}
-    </div>
+    </MovieDetailsThumb>
   );
 };
 

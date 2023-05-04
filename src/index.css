@@ -10,7 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: #140e12;
-  color: azure;
+
+  color: #f0fff8d4;
+  line-height: 24px;
 }
 
 code {
@@ -19,13 +21,20 @@ code {
 }
 
 a {
+  padding: 0;
+  margin: 0;
   text-decoration: none;
+  color: #f0fff8d4;
 }
 
 img {
   display: block;
 
   object-fit: contain;
+}
+
+p {
+  letter-spacing: 0.2px;
 }
 
 ul,
@@ -36,5 +45,9 @@ h1,
 h3 {
   margin: 0;
   padding: 0;
-  color: azure;
+  color: #f0fff8d4;
+}
+
+ul {
+  list-style: none;
 }

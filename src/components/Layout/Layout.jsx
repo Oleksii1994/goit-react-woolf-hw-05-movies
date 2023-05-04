@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 // import { NavLink } from 'react-router-dom';
 import { Header, Nav, StyledLink } from './Layout.styled';
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <div>
       <Header>
@@ -18,3 +18,5 @@ export const Layout = () => {
     </div>
   );
 };
+
+export default Layout;

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 12px 32px;
   background: linear-gradient(to bottom, #7927b200, #ff00aa7a);
   height: 80px;
   font-weight: 600;

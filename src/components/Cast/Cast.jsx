@@ -2,10 +2,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  CastItem,
+  ProfileImgThumb,
+  ActorsGallery,
+  ActorNameThumb,
+  ActorPhoto,
+} from './Cast.styled';
 
 const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
 
-export const Cast = () => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
   const normalizedCast = arr => {
@@ -35,19 +42,31 @@ export const Cast = () => {
   }, [cast, movieId]);
 
   return (
-    <ul>
+    <ActorsGallery>
       {cast.map(({ id, character, name, profile_path }) => {
         return (
-          <li key={id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-              alt={name}
-            />
-            <p>{name}</p>
-            <p>{character}</p>
-          </li>
+          <CastItem key={id}>
+            <ProfileImgThumb>
+              <ActorPhoto
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500/${profile_path}`
+                    : `https://as1.ftcdn.net/v2/jpg/05/64/45/52/1000_F_564455291_RRMiR6jlecxRBpSdtOT1KAX8a8FRhinM.jpg`
+                }
+                alt={name}
+                width="280"
+                height="420"
+              />
+            </ProfileImgThumb>
+            <ActorNameThumb>
+              <h3>{name}</h3>
+              <p>{character}</p>
+            </ActorNameThumb>
+          </CastItem>
         );
       })}
-    </ul>
+    </ActorsGallery>
   );
 };
+
+export default Cast;

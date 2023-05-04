@@ -80,3 +80,7 @@ export const SearchInput = styled.input`
     color: #ffffff;
   }
 `;
+
+export const PosterImg = styled.img`
+  object-fit: cover;
+`;
