@@ -32,7 +32,7 @@ export const Cast = () => {
       }
     };
     getCast();
-  }, [cast]);
+  }, [cast, movieId]);
 
   return (
     <ul>
