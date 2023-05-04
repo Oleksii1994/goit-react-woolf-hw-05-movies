@@ -51,3 +51,7 @@ h3 {
 ul {
   list-style: none;
 }
+
+.msg {
+  text-align: center;
+}

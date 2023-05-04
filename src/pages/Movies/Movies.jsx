@@ -1,6 +1,3 @@
-// import { NavLink } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
@@ -28,8 +25,6 @@ const fetchMovie = async searchWord => {
     return await axios.get(
       `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&query=${searchWord}&page=1`
     );
-    // const trendingMovies = res.data.results;
-    // console.log(trendingMovies);
   } catch (e) {
     console.log(e);
   }
@@ -42,19 +37,15 @@ const Movies = () => {
   const searchQueryFromParams = searchParams.get('query');
   const location = useLocation();
   useEffect(() => {
-    console.log(searchQueryFromParams);
     if (searchQueryFromParams === null) {
       return;
     }
 
     try {
-      // const { value } = event.target.lastChild;
-      // setSearchQuerry(value.toLowerCase().trim());
       const getFilteredMovies = async () => {
         const {
           data: { results },
         } = await fetchMovie(searchQueryFromParams);
-        // console.log(results);
 
         if (!results.length) {
           Notiflix.Notify.warning(
@@ -79,9 +70,8 @@ const Movies = () => {
             original_title,
           })
         );
-        // console.log(filteredData);
+
         setFilteredMovies(filteredData);
-        // console.log(filteredMovies);
       };
 
       getFilteredMovies();

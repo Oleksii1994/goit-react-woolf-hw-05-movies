@@ -26,7 +26,7 @@ const Reviews = () => {
         );
 
         setReviews(normalizedReviews(results));
-        console.log(normalizedReviews(results));
+
         return reviews;
       } catch (e) {
         console.log(e.message);
@@ -38,13 +38,17 @@ const Reviews = () => {
 
   return (
     <ReviewsList>
-      {reviews.map(({ id, content }) => {
-        return (
-          <ReviewItem key={id}>
-            <p>{content}</p>
-          </ReviewItem>
-        );
-      })}
+      {!reviews.length ? (
+        <p className="msg">Sorry, there are no reviews</p>
+      ) : (
+        reviews.map(({ id, content }) => {
+          return (
+            <ReviewItem key={id}>
+              <p>{content}</p>
+            </ReviewItem>
+          );
+        })
+      )}
     </ReviewsList>
   );
 };
