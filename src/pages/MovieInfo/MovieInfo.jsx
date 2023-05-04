@@ -41,7 +41,7 @@ const MovieInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(movieDetails.genres);
+  // console.log(movieDetails.genres);
 
   return (
     <div>
