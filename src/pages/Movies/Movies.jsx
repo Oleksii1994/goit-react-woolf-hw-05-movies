@@ -2,7 +2,7 @@
 // import PropTypes from 'prop-types';
 
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import axios from 'axios';
 import { FaSistrix } from 'react-icons/fa';
@@ -39,7 +39,7 @@ const Movies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQueryFromParams = searchParams.get('query');
-
+  const location = useLocation();
   useEffect(() => {
     console.log(searchQueryFromParams);
     if (searchQueryFromParams === null) {
@@ -188,7 +188,7 @@ const Movies = () => {
               original_title,
             }) => {
               return (
-                <Link to={`/movies/${id}`} key={id}>
+                <Link to={`/movies/${id}`} state={{ from: location }} key={id}>
                   <TrendingItem>
                     <ImgThumb>
                       <img
