@@ -1,8 +1,8 @@
 // import { NavLink } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import { useEffect, useState, Suspense } from 'react';
-import { Link, useSearchParams, useLocation, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import axios from 'axios';
 import { FaSistrix } from 'react-icons/fa';
