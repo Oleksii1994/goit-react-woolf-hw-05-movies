@@ -45,7 +45,7 @@ const Movies = () => {
     if (searchQueryFromParams === null) {
       return;
     }
-    // console.log(123);
+
     try {
       // const { value } = event.target.lastChild;
       // setSearchQuerry(value.toLowerCase().trim());
@@ -96,10 +96,6 @@ const Movies = () => {
     event.preventDefault();
     let { value } = event.target.elements.search;
 
-    // if (value === searchQuerry) {
-    //   return Notiflix.Notify.warning('Try another movies to find');
-    // }
-    // console.dir(event.target.lastChild.value);
     setSearchQuerry(value.toLowerCase().trim());
     setSearchParams({ query: value.toLowerCase().trim() });
 
