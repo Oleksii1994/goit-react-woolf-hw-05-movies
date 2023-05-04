@@ -6,8 +6,8 @@ import Home from 'pages/Home/Home';
 import MovieInfo from 'pages/MovieInfo/MovieInfo';
 import Movies from 'pages/Movies/Movies';
 import { Layout } from './Layout/Layout';
-// import { Cast } from './Cast/Cast';
-// import { Reviews } from './Reviews/Reviews';
+import { Cast } from './Cast/Cast';
+import { Reviews } from './Reviews/Reviews';
 
 export const App = () => {
   // const [searchQuerry, setSearchQuerry] = useState('');
@@ -29,8 +29,8 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieInfo />}>
-          {/* <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} /> */}
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<Home />} />
       </Route>
