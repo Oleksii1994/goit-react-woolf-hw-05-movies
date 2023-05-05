@@ -23,3 +23,8 @@ export const StyledLink = styled(NavLink)`
     color: #ffffff;
   }
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;

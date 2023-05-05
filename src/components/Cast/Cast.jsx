@@ -41,7 +41,7 @@ const Cast = () => {
   return (
     <ActorsGallery>
       {!cast.length ? (
-        <p>Sorry, there is no information about cast</p>
+        <p>Possibly, there is no information about cast</p>
       ) : (
         cast.map(({ id, character, name, profile_path }) => {
           return (

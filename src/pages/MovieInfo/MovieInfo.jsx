@@ -1,6 +1,8 @@
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { useEffect, useState, useRef, Suspense } from 'react';
 
+import { ThreeDots } from 'react-loader-spinner';
+
 import { fetchMovieInfo } from 'api/api';
 import { FaChevronLeft } from 'react-icons/fa';
 import {
@@ -14,6 +16,7 @@ import {
   AdditionalInfoList,
   AdditionalItemLink,
 } from './MovieInfo.styled';
+import { LoaderContainer } from 'components/Layout/Layout.styled';
 
 const MovieInfo = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -84,12 +87,27 @@ const MovieInfo = () => {
             </TextContentBox>
           </MovieInfoCard>
 
-          <Suspense fallback="Loading...">
+          <Suspense
+            fallback={
+              <LoaderContainer>
+                <ThreeDots
+                  height="80"
+                  width="80"
+                  radius="9"
+                  color="#ff00aa7a"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </LoaderContainer>
+            }
+          >
             <Outlet />
           </Suspense>
         </div>
       )}
-      {!Object.keys(movieDetails).length && <p>Sorry, not found</p>}
+      {/* {!Object.keys(movieDetails).length && <p>Sorry, not found</p>} */}
     </MovieDetailsThumb>
   );
 };
