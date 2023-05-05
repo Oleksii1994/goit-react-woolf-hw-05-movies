@@ -1,7 +1,6 @@
-// import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchMovieCast } from 'api/api';
 import {
   CastItem,
   ProfileImgThumb,
@@ -9,8 +8,6 @@ import {
   ActorNameThumb,
   ActorPhoto,
 } from './Cast.styled';
-
-const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -23,15 +20,14 @@ const Cast = () => {
       profile_path,
     }));
   };
+
   useEffect(() => {
     const getCast = async () => {
       try {
         const {
           data: { cast },
-        } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${KEY}&language=en-US`
-        );
-        // console.log(cast);
+        } = await fetchMovieCast(movieId);
+
         setCast(normalizedCast(cast));
         return cast;
       } catch (e) {
@@ -39,7 +35,8 @@ const Cast = () => {
       }
     };
     getCast();
-  }, [cast, movieId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ActorsGallery>

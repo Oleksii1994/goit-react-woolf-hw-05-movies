@@ -1,6 +1,7 @@
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { useEffect, useState, useRef, Suspense } from 'react';
 
+import { fetchMovieInfo } from 'api/api';
 import { FaChevronLeft } from 'react-icons/fa';
 import {
   MovieDetailsThumb,
@@ -14,9 +15,6 @@ import {
   AdditionalItemLink,
 } from './MovieInfo.styled';
 
-import axios from 'axios';
-const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
-
 const MovieInfo = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
@@ -26,9 +24,7 @@ const MovieInfo = () => {
   useEffect(() => {
     try {
       const getInfo = async () => {
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${KEY}&language=en-US`
-        );
+        const { data } = await fetchMovieInfo(movieId);
 
         setMovieDetails(data);
       };

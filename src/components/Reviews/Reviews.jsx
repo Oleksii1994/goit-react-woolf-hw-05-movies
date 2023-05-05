@@ -1,9 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReviewItem, ReviewsList } from './Reviews.styled';
-
-const KEY = '298a5b49d75fb843dc4c4c38d9d64139';
+import { fetchMovieReviews } from 'api/api';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -21,9 +19,7 @@ const Reviews = () => {
       try {
         const {
           data: { results },
-        } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${KEY}&language=en-US&page=1`
-        );
+        } = await fetchMovieReviews(movieId);
 
         setReviews(normalizedReviews(results));
 
