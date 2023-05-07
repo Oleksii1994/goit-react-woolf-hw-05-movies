@@ -40,8 +40,8 @@ const Home = () => {
     <TrendingGallery>
       {popularMovies.map(({ id, poster_path, title }) => {
         return (
-          <Link to={`/movies/${id}`} key={id}>
-            <TrendingItem>
+          <TrendingItem key={id}>
+            <Link to={`/movies/${id}`}>
               <ImgThumb>
                 <PosterImg
                   src={
@@ -56,8 +56,8 @@ const Home = () => {
               <TitleMovieThumb>
                 <h2>{title}</h2>
               </TitleMovieThumb>
-            </TrendingItem>
-          </Link>
+            </Link>
+          </TrendingItem>
         );
       })}
     </TrendingGallery>

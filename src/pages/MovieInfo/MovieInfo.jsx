@@ -21,7 +21,9 @@ import { LoaderContainer } from 'components/Layout/Layout.styled';
 const MovieInfo = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
+
   const location = useLocation();
+
   const pathToBack = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
@@ -80,6 +82,12 @@ const MovieInfo = () => {
                   <li>
                     <AdditionalItemLink to="reviews">
                       Reviews
+                    </AdditionalItemLink>
+                  </li>
+
+                  <li>
+                    <AdditionalItemLink to="trailer">
+                      Trailer
                     </AdditionalItemLink>
                   </li>
                 </AdditionalInfoList>

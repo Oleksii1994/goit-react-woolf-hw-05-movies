@@ -13,8 +13,8 @@ const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
   const normalizedCast = arr => {
-    return arr.map(({ id, character, name, profile_path }) => ({
-      id,
+    return arr.map(({ cast_id, character, name, profile_path }) => ({
+      cast_id,
       character,
       name,
       profile_path,
@@ -43,9 +43,9 @@ const Cast = () => {
       {!cast.length ? (
         <p>Possibly, there is no information about cast</p>
       ) : (
-        cast.map(({ id, character, name, profile_path }) => {
+        cast.map(({ cast_id, character, name, profile_path }) => {
           return (
-            <CastItem key={id}>
+            <CastItem key={cast_id}>
               <ProfileImgThumb>
                 <ActorPhoto
                   src={

@@ -51,3 +51,13 @@ export const fetchMovieReviews = async movieId => {
     console.log(e);
   }
 };
+
+export const fetchTrailerVideo = async movieId => {
+  try {
+    return await axios.get(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${KEY}&language=en-US`
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};

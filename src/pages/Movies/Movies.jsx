@@ -20,7 +20,7 @@ import {
 } from '../Home/Home.styled';
 
 const Movies = () => {
-  const [searchQuerry, setSearchQuerry] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQueryFromParams = searchParams.get('query');
@@ -60,23 +60,23 @@ const Movies = () => {
   }, [searchQueryFromParams, searchParams]);
 
   const onChange = ({ target }) => {
-    setSearchQuerry(target.value);
+    setSearchQuery(target.value);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     let { value } = event.target.elements.search;
 
-    setSearchQuerry(value.toLowerCase().trim());
+    setSearchQuery(value.toLowerCase().trim());
     setSearchParams({ query: value.toLowerCase().trim() });
 
-    if (searchQuerry.trim() === '') {
+    if (searchQuery.trim() === '') {
       Notiflix.Notify.warning('Enter title of movie to search');
       value = '';
       return;
     }
 
-    setSearchQuerry('');
+    setSearchQuery('');
   };
 
   return (
@@ -84,7 +84,7 @@ const Movies = () => {
       <SearchBarHeader>
         <SearchForm onSubmit={handleSubmit}>
           <SearchFormBtn type="submit" className="button">
-            <FaSistrix size="24px" fill="#fff" />
+            <FaSistrix size="24px" fill="#ffffff" />
             <SearchFormBtnLabel className="button-label">
               Search
             </SearchFormBtnLabel>
@@ -96,7 +96,7 @@ const Movies = () => {
             name="search"
             autoFocus
             placeholder="Search images and photos"
-            value={searchQuerry}
+            value={searchQuery}
             onChange={onChange}
           />
         </SearchForm>
@@ -106,8 +106,8 @@ const Movies = () => {
         <TrendingGallery>
           {filteredMovies.map(({ id, poster_path, original_title }) => {
             return (
-              <Link to={`/movies/${id}`} state={{ from: location }} key={id}>
-                <TrendingItem>
+              <TrendingItem key={id}>
+                <Link to={`/movies/${id}`} state={{ from: location }}>
                   <ImgThumb>
                     <PosterImg
                       src={
@@ -123,8 +123,8 @@ const Movies = () => {
                   <TitleMovieThumb>
                     <h2>{original_title}</h2>
                   </TitleMovieThumb>
-                </TrendingItem>
-              </Link>
+                </Link>
+              </TrendingItem>
             );
           })}
         </TrendingGallery>
