@@ -25,26 +25,23 @@ const Reviews = () => {
 
         return reviews;
       } catch (e) {
-        console.log(e.message);
+        setReviews([]);
       }
     };
     getReviews();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
-  return (
+  return !reviews.length ? (
+    <p className="msg">Possibly, there are no reviews</p>
+  ) : (
     <ReviewsList>
-      {!reviews.length ? (
-        <p className="msg">Possibly, there are no reviews</p>
-      ) : (
-        reviews.map(({ id, content }) => {
-          return (
-            <ReviewItem key={id}>
-              <p>{content}</p>
-            </ReviewItem>
-          );
-        })
-      )}
+      {reviews.map(({ id, content }) => {
+        return (
+          <ReviewItem key={id}>
+            <p>{content}</p>
+          </ReviewItem>
+        );
+      })}
     </ReviewsList>
   );
 };

@@ -1,26 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
-import { FaSistrix } from 'react-icons/fa';
 import { fetchMoviesBySearchWord } from 'api/api';
-import {
-  SearchBarHeader,
-  SearchForm,
-  SearchInput,
-  SearchFormBtn,
-  SearchFormBtnLabel,
-  PosterImg,
-} from './Movies.styled';
-import {
-  TrendingItem,
-  TrendingGallery,
-  TitleMovieThumb,
-  ImgThumb,
-} from '../Home/Home.styled';
+import { SearchBarHeader } from './Movies.styled';
+import { SearchFormMovies } from 'components/SearchForm/SearchFormMovies';
 
 const Movies = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQueryFromParams = searchParams.get('query');
@@ -59,75 +46,18 @@ const Movies = () => {
     }
   }, [searchQueryFromParams, searchParams]);
 
-  const onChange = ({ target }) => {
-    setSearchQuery(target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    let { value } = event.target.elements.search;
-
-    setSearchQuery(value.toLowerCase().trim());
+  const onSubmit = value => {
     setSearchParams({ query: value.toLowerCase().trim() });
-
-    if (searchQuery.trim() === '') {
-      Notiflix.Notify.warning('Enter title of movie to search');
-      value = '';
-      return;
-    }
-
-    setSearchQuery('');
   };
 
   return (
     <div>
       <SearchBarHeader>
-        <SearchForm onSubmit={handleSubmit}>
-          <SearchFormBtn type="submit" className="button">
-            <FaSistrix size="24px" fill="#ffffff" />
-            <SearchFormBtnLabel className="button-label">
-              Search
-            </SearchFormBtnLabel>
-          </SearchFormBtn>
-
-          <SearchInput
-            type="text"
-            autoComplete="off"
-            name="search"
-            autoFocus
-            placeholder="Search images and photos"
-            value={searchQuery}
-            onChange={onChange}
-          />
-        </SearchForm>
+        <SearchFormMovies onSubmit={onSubmit} />
       </SearchBarHeader>
 
-      {filteredMovies && (
-        <TrendingGallery>
-          {filteredMovies.map(({ id, poster_path, original_title }) => {
-            return (
-              <TrendingItem key={id}>
-                <Link to={`/movies/${id}`} state={{ from: location }}>
-                  <ImgThumb>
-                    <PosterImg
-                      src={
-                        poster_path
-                          ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                          : `https://media.istockphoto.com/id/147273331/uk/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%B8%D0%BD%D1%94-%D0%B2%D1%96%D0%B4%D1%80%D0%BE-%D0%BF%D0%BE%D0%BF%D0%BA%D0%BE%D1%80%D0%BD%D1%83.jpg?s=2048x2048&w=is&k=20&c=EVEpgBCnZmkrieihX5eDgsssBgcGyU71woNkj5N4FiM=`
-                      }
-                      alt={original_title}
-                      width="352"
-                      height="528"
-                    />
-                  </ImgThumb>
-                  <TitleMovieThumb>
-                    <h2>{original_title}</h2>
-                  </TitleMovieThumb>
-                </Link>
-              </TrendingItem>
-            );
-          })}
-        </TrendingGallery>
+      {filteredMovies.length > 0 && (
+        <MoviesList movies={filteredMovies} location={location} />
       )}
     </div>
   );

@@ -35,11 +35,9 @@ const MovieInfo = () => {
       };
       getInfo();
     } catch (e) {
-      console.log(e.message);
       setMovieDetails({});
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   return (
     <MovieDetailsThumb>
