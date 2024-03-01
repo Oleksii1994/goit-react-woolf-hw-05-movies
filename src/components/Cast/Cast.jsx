@@ -12,6 +12,7 @@ import {
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
+
   const normalizedCast = arr => {
     return arr.map(({ cast_id, character, name, profile_path }) => ({
       cast_id,
