@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from 'api/api';
+import { normalizedCast } from 'helpers/helpers';
 import {
   CastItem,
   ProfileImgThumb,
@@ -13,15 +14,6 @@ const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
 
-  const normalizedCast = arr => {
-    return arr.map(({ cast_id, character, name, profile_path }) => ({
-      cast_id,
-      character,
-      name,
-      profile_path,
-    }));
-  };
-
   useEffect(() => {
     const getCast = async () => {
       try {
@@ -30,8 +22,6 @@ const Cast = () => {
         } = await fetchMovieCast(movieId);
 
         setCast(normalizedCast(cast));
-
-        return cast;
       } catch (e) {
         setCast([]);
       }

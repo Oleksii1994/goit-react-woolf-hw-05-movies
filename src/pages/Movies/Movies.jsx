@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 
 import { fetchMoviesBySearchWord } from 'api/api';
+import { normalizedMovies } from 'helpers/helpers';
 import { SearchBarHeader } from './Movies.styled';
 import { SearchFormMovies } from 'components/SearchForm/SearchFormMovies';
 
@@ -11,7 +12,6 @@ const Movies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQueryFromParams = searchParams.get('query');
-  const location = useLocation();
 
   useEffect(() => {
     if (searchQueryFromParams === null) {
@@ -29,15 +29,8 @@ const Movies = () => {
             'Oops there are no movies by this search, try another title'
           );
         }
-        const filteredData = results.map(
-          ({ id, poster_path, original_title }) => ({
-            id,
-            poster_path,
-            original_title,
-          })
-        );
 
-        setFilteredMovies(filteredData);
+        setFilteredMovies(normalizedMovies(results));
       };
 
       getFilteredMovies();
@@ -56,9 +49,7 @@ const Movies = () => {
         <SearchFormMovies onSubmit={onSubmit} />
       </SearchBarHeader>
 
-      {filteredMovies.length > 0 && (
-        <MoviesList movies={filteredMovies} location={location} />
-      )}
+      {filteredMovies.length > 0 && <MoviesList movies={filteredMovies} />}
     </div>
   );
 };

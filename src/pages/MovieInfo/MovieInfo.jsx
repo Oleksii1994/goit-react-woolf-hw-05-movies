@@ -113,7 +113,6 @@ const MovieInfo = () => {
           </Suspense>
         </div>
       )}
-      {/* {!Object.keys(movieDetails).length && <p>Sorry, not found</p>} */}
     </MovieDetailsThumb>
   );
 };

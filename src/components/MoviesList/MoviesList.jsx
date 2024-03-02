@@ -4,10 +4,12 @@ import {
   ImgThumb,
   TitleMovieThumb,
 } from './MoviesList.styled';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { PosterImg } from 'pages/Movies/Movies.styled';
 
-export const MoviesList = ({ movies, location }) => {
+export const MoviesList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <TrendingGallery>
       {movies.map(({ id, poster_path, title }) => {

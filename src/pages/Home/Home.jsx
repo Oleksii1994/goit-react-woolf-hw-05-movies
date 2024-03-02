@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Notify } from 'notiflix';
 import { fetchTrendingMoviesData } from 'api/api';
-
+import { normalizedMovies } from 'helpers/helpers';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const Home = () => {
@@ -14,13 +14,7 @@ const Home = () => {
           data: { results },
         } = await fetchTrendingMoviesData();
 
-        const filteredData = results.map(({ id, poster_path, title }) => ({
-          id,
-          poster_path,
-          title,
-        }));
-
-        setPopularMovies(filteredData);
+        setPopularMovies(normalizedMovies(results));
       };
       getTrendingMovies();
     } catch (e) {
